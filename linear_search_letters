@@ -1,0 +1,62 @@
+#include<iostream>//Including iostream
+#include<bits/stdc++.h>//Includes every standard library, useful for g++ compiler only
+using namespace std;//using standard namespace
+
+//defining linear search function
+void lsearch()
+{	
+	string alphabets = " !.abcdefghijklmnopqrstuvwxyz";
+	char user_output[1000];//Can input 1000 characters
+	char answer;//y or n, otherwise invalid
+	char selected;
+	int pos = 0;
+	lbl://To add multiple letters
+	for(int i = 0; i < alphabets.length(); i++)
+	{ 
+		cout << "Are you thinking of the letter '" << alphabets[i] << "'?" << endl;
+		cin >> answer;
+
+		if(answer == 'y')
+		{
+			selected = alphabets[i];
+			user_output[pos++] = selected;
+			if(selected == '!')
+			{
+				break;
+			}
+			goto lbl;//Go back to lbl and start over for next letter
+		}
+		else if(answer == 'n')
+		{
+			continue;
+		}
+		else
+		{
+			cout << "Invalid input, enter again" << endl;
+			goto lbl;
+		}			
+	}
+	
+	//Printing the output
+	cout << "You entered:" << endl;
+	for(int j = 0; j < pos - 1; j++)
+	{
+		cout << user_output[j];
+	}
+	cout << endl;
+	return;//Nothing to return, output is printed
+}
+
+
+int main()
+{
+	cout << "If given letter matches, enter 'y', otherwise enter 'n' only." << endl << "To stop enter y for '!'" << endl;
+    //Instructions
+
+	lsearch();//Calling the function
+	
+	//Terminal turns off right away, so added following code
+	char x;
+	cout << "Press any key to terminate";
+	cin >> x;
+}
