@@ -1,0 +1,94 @@
+#include<iostream>//Including iostream
+#include<bits/stdc++.h>//Includes every standard library, useful for g++ compiler only
+using namespace std;//using standard namespace
+
+//Defining binary search function
+void bsearch()
+{
+    string alphabets = " !.abcdefghijklmnopqrstuvwxyz";
+	char user_output[1000];//Can input 1000 characters
+	char answer;//y or n, otherwise invalid
+	char selected;
+    int pos = 0;//Positional pointer for output
+    int extra = 0;//Extra variable for assigning lower and upper limits in 'n' case
+
+    lbl:
+    int ll = 0,//lower limit = 0 for first run
+        ul = alphabets.length() / 2 ;//upper limit for first run
+    for (int i = 0; i < alphabets.length(); i++)
+    {
+        cout << "Is your letter between '" << alphabets[ll] << "' and '" << alphabets[ul] << "'" << endl;
+        cin >> answer;
+        
+        if (answer == 'y')
+        {
+            if (ul == ll + 1 || ll == ul)
+            //Required letter will be one of the two if options are right next to one another; if ul == ll, then thats your letter
+            {
+                cout << "Is your letter '" << alphabets[ll] << "'?" << endl;
+                cin >> answer;
+                if (answer == 'y')
+                {
+                    selected = alphabets[ll];
+			        user_output[pos++] = selected;
+                }
+                else
+                {
+                    cout << "Your letter is '" << alphabets[ul] << "'" << endl;
+                    selected = alphabets[ul];
+			        user_output[pos++] = selected;
+                }
+
+                if(selected == '!')
+				{
+                    break;
+                }
+                goto lbl;
+            }
+            else
+            {
+                ul = (ul + ll) / 2;
+                if (ul > alphabets.length())//Limiting condition in case if upper limit exceeds length of alphabets string
+                {
+                    ul = alphabets.length() - 1;
+                }
+            }
+        }
+        else if (answer == 'n')
+        {
+            extra = ul;
+            ul += ul - (ul + ll) / 2;//Setting new upper limit
+            ll = extra + 1;//Setting new lower limit as the previous upper limit
+            if (ul > alphabets.length())//Limiting condition in case if upper limit exceeds length of alphabets string
+            {
+                ul = alphabets.length() - 1;
+            }
+        }
+        else
+        {
+            cout << "Enter valid answer" << endl;
+            goto lbl;
+        }
+    }
+
+    cout << "You entered:" << endl;
+    //Printing the output
+    for (int j = 0; j < pos -1; j++)
+    {
+        cout << user_output[j];
+    }
+    cout << endl;
+}
+
+int main()
+{
+    cout << "Enter 'y' if condition is true, otherwise 'n'" << endl << "To stop, enter 'y' for '!'" << endl;
+    //Instrucions
+
+    bsearch();//Calling the function
+    
+    //Terminal turns off right away, so added following code
+	char x;
+	cout << "Press any key to terminate";
+	cin >> x;
+}
