@@ -1,2 +1,2 @@
 # Algorithms_all
-All (important) C++ codes from Data Structures and Algorithms course at Drexel University.
+Includes C++ codes for linear and binary search, binary search tree, bubble sort, insertion sort, merge sort, quicksort and heapsort algorithms. 
